@@ -9,7 +9,7 @@ const ResultTable = () => {
 
   const getData = async () => {
     const x = {"username":userId , quizId : _id} ;
-    await axios.post('http://localhost:5000/api/result/get-result',x)
+    await axios.post('https://quiz-app-server-a95t.onrender.com/api/result/get-result',x)
     .then( (response) => setData(response.data));
 
     console.log(data);

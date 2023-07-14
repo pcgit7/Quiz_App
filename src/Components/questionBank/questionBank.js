@@ -69,7 +69,7 @@ const QuestionBank = () => {
     }
 
     function onSubmit(){
-        const url = 'http://localhost:5000/api/question';
+        const url = 'https://quiz-app-server-a95t.onrender.com/api/question';
 
         const updated = answers.map( item => parseInt(item));
 

@@ -12,7 +12,7 @@ const Home = () => {
     const getData = async () => {
         try 
         {
-            const response = await getServerData('http://localhost:5000/api/question');
+            const response = await getServerData('https://quiz-app-server-a95t.onrender.com/api/question');
             setQuizs(response);
             setFilteredQuizs(response);
             console.log(quizs);
