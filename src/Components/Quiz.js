@@ -1,7 +1,7 @@
 import React, { useEffect ,useState} from 'react'
 import Questions from './Questions';
 import { useSelector , useDispatch} from 'react-redux';
-import { useFetchQuestions , MoveNextQuestion , MovePrevQuestion} from '../hooks/fetchQuestions';
+import {  MoveNextQuestion , MovePrevQuestion} from '../hooks/fetchQuestions';
 import { pushAnswer } from '../hooks/setResult';
 import {useNavigate} from 'react-router-dom';
 
@@ -11,7 +11,7 @@ const Quiz = () => {
 
     const result = useSelector(state => state.result.result);
 
-    const [ {isLoading , serverError , apiData} ] = useFetchQuestions();
+    //const [ {isLoading , serverError , apiData} ] = useFetchQuestions();
 
     const { trace,queue } = useSelector(state => state.questions);
     

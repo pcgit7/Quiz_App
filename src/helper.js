@@ -23,3 +23,14 @@ export async function postServerData(url, result, callback){
     const data = await (await axios.post(url, result))?.data;
     return callback ? callback(data) : data;
 }
+
+export async function postQuestionBank(url,data){
+    try {
+        const response = await axios.post(url,data);
+        if(response.data.success)
+        alert("Thanks for submitting");
+        return;
+    } catch (error) {
+        console.log(error);
+    };
+};

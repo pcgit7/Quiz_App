@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { getServerData } from '../helper';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const ResultTable = () => {
 
   const [data, setData] = useState([]);
+  const { result :{userId} , questions : {_id}} = useSelector((state) => state);
 
-  useEffect(() => {
-    getServerData(`http://localhost:5000/api/result`, (res) => {
-        setData(res)
-    })
-})
+  const getData = async () => {
+    const x = {"username":userId , quizId : _id} ;
+    await axios.post('http://localhost:5000/api/result/get-result',x)
+    .then( (response) => setData(response.data));
+
+    console.log(data);
+  };
+  
+  console.log(userId);
+  useEffect( () => {
+    getData();
+},[]);
 
 return (
 <div>

@@ -7,11 +7,10 @@ import { resetAllAction } from '../Redux/question_reducer';
 import { resetResultAction } from '../Redux/result_reducer';
 import { attemps_number, earnPoints_Number, flagResult } from '../helper';
 import { usePublishResult } from '../hooks/setResult';
-import axios from 'axios';
 
 const Result = () => {
     const dispatch = useDispatch();
-    const { questions : {queue , answers} , result : {result , userId }} = useSelector(state => state);
+    const { questions : {queue , answers , _id} , result : {result , userId }} = useSelector(state => state);
 
     console.log(queue , answers , userId , result);
 
@@ -28,6 +27,7 @@ const Result = () => {
         username : userId,
         attempts,
         points: earnPoints,
+        quizId : _id,
         achived : flag ? "Passed" : "Failed" });
 
     const onRestartHandler = async () => {
@@ -35,7 +35,7 @@ const Result = () => {
         dispatch(resetAllAction());
         dispatch(resetResultAction());
 
-        await axios.delete('http://localhost:5000/api/result');
+        //await axios.delete('http://localhost:5000/api/result');
     };
 
   return (
@@ -45,7 +45,7 @@ const Result = () => {
         <div className='result flex-center'>
             <div className='flex'>
                 <span>Username </span>
-                <span className='bold'>Daily Tuition</span>
+                <span className='bold'>{userId}</span>
             </div>
 
             <div className='flex'>
@@ -87,4 +87,4 @@ const Result = () => {
   )
 }
 
-export default Result
+export default Result;

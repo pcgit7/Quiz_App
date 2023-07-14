@@ -1,0 +1,46 @@
+.modal-wrapper
+{
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color:  rgba(0, 0, 0, 0.75);
+}
+
+.modal-container {
+  position: fixed;
+  top: 25vh;
+  left: 30%;
+  width: 40%;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 30;
+  animation: step-end 300ms ease-out forwards;
+}
+  
+.modal-container p
+{
+    font-size : 1.4em;
+    font-weight: 700;
+    text-align: center;
+}
+
+.submit
+{
+  font-size: 1em;
+  color : #cecece;
+  display : flex;
+  justify-content : space-between;
+}
+
+.yes
+{
+  background-color: #56eb57;
+}
+.no
+{
+  background-color: #ed2626;
+}

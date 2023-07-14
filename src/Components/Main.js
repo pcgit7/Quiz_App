@@ -32,7 +32,7 @@ const Main = () => {
         </form>
 
         <div className='start'>
-            <Link to={'quiz'} className='btn' onClick={startQuizHandler}>Start Quiz</Link>
+            <Link to={'/quiz'} className='btn' onClick={startQuizHandler}>Start Quiz</Link>
         </div>
     </div>
   )

@@ -19,6 +19,24 @@
     background-color: #faff5a;
 }
 
+.addQuestion
+{
+    display: flex;
+    justify-content: center;
+    padding-top: 2em;
+    margin-bottom: 60px;
+}
+
+.addQuestion .btn
+{
+    background-color: greenyellow;
+    padding: .2em 1.7em;
+    border: none;
+    border-radius: .1em;
+    font-size: 1.2em;
+    color: #202020;
+    text-decoration: none;
+}
 #form{
     display: flex;
     justify-content: center;
@@ -31,4 +49,5 @@
     border: none;
     border-radius: 3px;
     font-size: 1em;
+    text-align: center;
 }
