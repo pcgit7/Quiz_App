@@ -4,10 +4,12 @@ const { questions, answers} = require('../database/data');
 const Result = require('../Models/resultModel');
 
 router.get('/', async (req,res) => {
-    console.log("hi");
    try 
    {
-    const r = await Result.find();
+    const userId = req.body.username;
+    console.log(req.body);
+    const r = await Result.find(req.body);
+    //console.log(r);
         res.json(r);
    } 
    catch (error) {
@@ -18,10 +20,27 @@ router.get('/', async (req,res) => {
    } 
 });
 
+router.post('/get-result' , async (req,res) => {
+    try 
+    {
+     const userId = req.body.username;
+    //console.log(req.body);
+     const r = await Result.find(req.body);
+         res.json(r);
+    } 
+    catch (error) {
+     res.status(500).send({
+         message: "Error in getting data",
+         success: false,
+       });
+    } 
+});
+
 router.post('/' ,async (req,res) => {
     try 
     {
-        const { username, result, attempts, points, achived } = req.body;
+        //console.log(req.body);
+        const { username, result, attempts, points, achived , quiz} = req.body;
 
         if(!username && !result) 
         throw new Error('Data Not Provided...!');
@@ -37,6 +56,7 @@ router.post('/' ,async (req,res) => {
 
     } catch (error)
     {
+        console.log(error);
         res.status(500).json({
             msg : error.message,
             success : false,
@@ -58,6 +78,6 @@ router.delete('/',async(req,res) => {
             success : false,
         });
     }
-})
+});
 
 module.exports = router;

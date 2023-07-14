@@ -4,7 +4,6 @@ const { questions, answers} = require('../database/data');
 const Question = require('../Models/questionModel');
 
 router.get('/', async (req,res) => {
-    console.log("hi");
    try 
    {
     const queue = await Question.find();
@@ -21,7 +20,7 @@ router.get('/', async (req,res) => {
 router.post('/' ,async (req,res) => {
     try 
     {
-        await Question.insertMany({ questions, answers });
+        await Question.insertMany(req.body);
         res.status(200).json({
             msg :"questions data inserted successfully",
             success : true,

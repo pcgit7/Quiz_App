@@ -6,6 +6,7 @@ const resultSchema = new mongoose.Schema({
     attempts : { type : Number, default : 0},
     points : { type : Number, default : 0},
     achived : { type : String, default : ''},
+    quizId : {type : String , required : true},
     createdAt : { type : Date, default : Date.now}
 });
 
