@@ -14,14 +14,16 @@ const questionBankReducer = createSlice({
 
     reducers : {
         metaDataAction : (state,action) => {
-
             const {noOfQuestions , topic , difficulty , category} = action.payload;
             return {
                 ...state,
                 noOfQuestions ,
                 topic ,
                 difficulty , 
-                category 
+                category ,
+                questions : [],
+                answers : [],
+                trace : 0
             };
         },
         moveNextAction : (state,action) => {
