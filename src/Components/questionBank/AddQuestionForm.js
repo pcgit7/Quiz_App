@@ -2,48 +2,34 @@ import React, { useEffect, useState } from 'react';
 import './questionForm.css';
 import { useSelector } from 'react-redux';
 
-const AddQuestionForm = ({addNewItem}) => {
+const AddQuestionForm = ({ addNewItem }) => {
+  const { trace, questions, answers, noOfQuestions } = useSelector((state) => state.questionBank);
 
-  const {trace , questions , answers , noOfQuestions } = useSelector(state => state.questionBank);
-
-  //const state = useSelector(state => state.questionBank);
-
-  const queue = questions[trace] ;
+  const queue = questions[trace];
   const ans = answers[trace];
-  useEffect(()=>{
-     if(queue)
-     {
+  useEffect(() => {
+    if (queue) {
       setQuestion(queue?.question);
       setOptionA(queue?.options[0]);
       setOptionB(queue?.options[1]);
       setOptionC(queue?.options[2]);
       setOptionD(queue?.options[3]);
       setCorrectOption(ans);
-     }
-
-     else
-     {
+    } else {
       setQuestion('');
       setOptionA('');
       setOptionB('');
       setOptionC('');
       setOptionD('');
       setCorrectOption('');
-     }
-  },[trace,queue]);
-
-  //console.log(queue);
-  
+    }
+  }, [trace, queue]);
 
   const [question, setQuestion] = useState('');
   const [optionA, setOptionA] = useState('');
-
   const [optionB, setOptionB] = useState('');
-
   const [optionC, setOptionC] = useState('');
-
   const [optionD, setOptionD] = useState('');
-
   const [correctOption, setCorrectOption] = useState('');
 
   const handleQuestionChange = (event) => {
@@ -72,25 +58,21 @@ const AddQuestionForm = ({addNewItem}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    // Create a new question object
+
     const newQuestion = {
       question,
       options: [optionA, optionB, optionC, optionD],
-      correctOption
+      correctOption,
     };
-
-    // Perform the logic to add the new question to the question bank
-    //console.log('New Question:', newQuestion);
 
     addNewItem(newQuestion);
   };
 
   return (
-    <div className='add-question-form'>
-      <h2>Question No {trace+1} of {noOfQuestions}</h2>
+    <div className="add-question-form">
+      <h2>Question No {trace + 1} of {noOfQuestions}</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className='question_desc'>
           <label htmlFor="question">Question:</label>
           <input
             type="text"
@@ -100,45 +82,49 @@ const AddQuestionForm = ({addNewItem}) => {
             required
           />
         </div>
-        <div>
-          <label htmlFor="optionA">Option 1:</label>
-          <input
-            type="text"
-            id="optionA"
-            value={optionA}
-            onChange={handleOptionAChange}
-            required
-          />
+        <div className="form-row">
+          <div>
+            <label htmlFor="optionA">Option 1:</label>
+            <input
+              type="text"
+              id="optionA"
+              value={optionA}
+              onChange={handleOptionAChange}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="optionB">Option 2:</label>
+            <input
+              type="text"
+              id="optionB"
+              value={optionB}
+              onChange={handleOptionBChange}
+              required
+            />
+          </div>
         </div>
-        <div>
-          <label htmlFor="optionB">Option 2:</label>
-          <input
-            type="text"
-            id="optionB"
-            value={optionB}
-            onChange={handleOptionBChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="optionC">Option 3:</label>
-          <input
-            type="text"
-            id="optionC"
-            value={optionC}
-            onChange={handleOptionCChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="optionD">Option 4:</label>
-          <input
-            type="text"
-            id="optionD"
-            value={optionD}
-            onChange={handleOptionDChange}
-            required
-          />
+        <div className="form-row">
+          <div>
+            <label htmlFor="optionC">Option 3:</label>
+            <input
+              type="text"
+              id="optionC"
+              value={optionC}
+              onChange={handleOptionCChange}
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="optionD">Option 4:</label>
+            <input
+              type="text"
+              id="optionD"
+              value={optionD}
+              onChange={handleOptionDChange}
+              required
+            />
+          </div>
         </div>
         <div>
           <label htmlFor="correctOption">Correct Option:</label>
@@ -155,7 +141,9 @@ const AddQuestionForm = ({addNewItem}) => {
             <option value="4">4</option>
           </select>
         </div>
-        <button type="submit">{trace>=questions.length ? 'Add Question' : 'Update Question'}</button>
+        <button type="submit">
+          {trace >= questions.length ? 'Add Question' : 'Update Question'}
+        </button>
       </form>
     </div>
   );

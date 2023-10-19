@@ -1,44 +1,69 @@
-.add-question-form {
-    margin: 20px auto;
-    width: 400px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-  }
-  
-  .add-question-form h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .add-question-form form {
+  .add-question-form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
   
-  .add-question-form label {
-    font-weight: bold;
-    margin-bottom: 5px;
+  form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
   }
   
-  .add-question-form input,
-  .add-question-form select {
-    padding: 8px;
-    margin-bottom: 10px;
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .form-row > div {
+    flex: 1;
+    margin: 5px;
+  }
+  
+  label {
+    display: block;
+    color: #FFD700; /* Slight yellow color */
+  }
+  
+  #question {
+    width: 100%;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
+    margin: 5px;
+    height: 80px;
+    overflow-x: hidden;
+    white-space: pre-line; 
   }
   
-  .add-question-form button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: #fff;
+  input[type="text"]:not(#question),
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin: 5px;
+    overflow-x: hidden; /* Hide horizontal overflow */
+    white-space: pre-line; /* Allow text to wrap to the next line */
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    overflow-x: hidden; /* Hide horizontal overflow */
+    white-space: pre-line; /* Allow text to wrap to the next line */
   }
   
-  .add-question-form button[type="submit"]:hover {
-    background-color: #45a049;
+  button[type="submit"]:hover {
+    background-color: #0056b3;
   }
+  
