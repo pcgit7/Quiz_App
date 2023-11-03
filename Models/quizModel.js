@@ -10,5 +10,5 @@ const quizSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
 });
 
-const questionModel = mongoose.model('Quiz',questionSchema);
+const questionModel = mongoose.model('Quiz',quizSchema);
 module.exports = questionModel;
