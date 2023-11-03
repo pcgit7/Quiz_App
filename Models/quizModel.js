@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const questionSchema = new mongoose.Schema({
+const quizSchema = new mongoose.Schema({
     questions: { type : Array, default: []}, // create question with [] default value
     answers : { type : Array, default: []},
     noOfQuestion : {type : Number , default : 5, required:true},
@@ -10,5 +10,5 @@ const questionSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
 });
 
-const questionModel = mongoose.model('Question',questionSchema);
+const questionModel = mongoose.model('Quiz',questionSchema);
 module.exports = questionModel;

@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const { questions, answers} = require('../database/data');
-const Question = require('../Models/questionModel');
+const Quiz = require('../Models/quizModel');
 
 router.get('/', async (req,res) => {
    try 
    {
-    const queue = await Question.find();
+    const queue = await Quiz.find();
     res.json(queue);
    } 
    catch (error) {
@@ -20,7 +20,7 @@ router.get('/', async (req,res) => {
 router.post('/' ,async (req,res) => {
     try 
     {
-        await Question.insertMany(req.body);
+        await Quiz.insertMany(req.body);
         res.status(200).json({
             msg :"questions data inserted successfully",
             success : true,
@@ -38,7 +38,7 @@ router.post('/' ,async (req,res) => {
 router.delete('/',async(req,res) => {
     try 
     {
-       await Question.deleteMany(); 
+       await Quiz.deleteMany(); 
        res.status(200).json({
         msg : "data deleted success",
         success : true
