@@ -41,7 +41,7 @@ const Questions = ({onChecked}) => {
                             value={false}
                             name="options"
                             id={`q${i}-option`}
-                            onChange={() => onSelectHandler(i)}
+                            onChange={() => onSelectHandler(i+1)}
                         />
 
                         <label className='text-primary' htmlFor={`q${i}-option`}>{q}</label>
