@@ -1,35 +1,33 @@
 import React, { useState ,useEffect} from 'react'
 import { useSelector,useDispatch } from 'react-redux';
-//import { useFetchQuestions } from '../hooks/fetchQuestions';
-import { updateResult } from '../hooks/setResult';
+import { updateResult } from '../hooks/Set_Result';
 
 
-const Questions = ({onChecked}) => {
-
-    const state = useSelector( state => state);
+const Questions = () => {
 
     const dispatch = useDispatch();
 
-    const result = useSelector(state => state.result.result);
-    
+    const { result , userId} = useSelector(state => state.result);
+  
     const questions = useSelector(state => state.questions.queue[state.questions.trace])
 
-    const [checked , setChecked] = useState(undefined);
+    const trace  = useSelector(state => state.questions.trace);
 
-    const { trace } = useSelector(state => state.questions);
+    const [checked , setChecked] = useState(result[trace]);
+
     
     useEffect( () => {
       dispatch(updateResult({checked , trace}));
     } , [checked]);
 
   const onSelectHandler = (i) => {
-    onChecked(i);
     setChecked(i);
-    dispatch(updateResult({checked,trace}));
   };
 
   return (
     <div className='questions'>
+        <h2 className="subtitle">Welcome, {userId}</h2>
+
         <h2 className='text-light'>{questions?.question}</h2>
 
         <ul key={questions?.id}>
@@ -41,7 +39,7 @@ const Questions = ({onChecked}) => {
                             value={false}
                             name="options"
                             id={`q${i}-option`}
-                            onChange={() => onSelectHandler(i+1)}
+                            onChange={() => onSelectHandler(i)}
                         />
 
                         <label className='text-primary' htmlFor={`q${i}-option`}>{q}</label>

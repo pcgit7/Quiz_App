@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { setQuestions } from '../../hooks/fetchQuestions';
+import { setQuestions } from '../../hooks/Set_Questions';
 import { useDispatch } from 'react-redux';
 
 const QuizItem = ({quiz}) => {

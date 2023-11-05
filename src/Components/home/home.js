@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getServerData } from '../../helper';
+import { getQuizes } from '../../helper';
 import QuizItem from './quizItem';
 import '../../styles/home.css';
 import Quizfilter from './Quizfilter';
@@ -12,10 +12,9 @@ const Home = () => {
     const getData = async () => {
         try 
         {
-            const response = await getServerData('https://quiz-app-server-a95t.onrender.com/api/question');
+            const response = await getQuizes('https://quiz-app-server-a95t.onrender.com/api/question');
             setQuizs(response);
             setFilteredQuizs(response);
-            console.log(quizs);
         } 
         catch (error) {
             console.log(error);
@@ -37,7 +36,7 @@ const Home = () => {
               return false;
             }
         
-            if (selectedNumQuestions !== 'all' && quiz.numQuestions !== parseInt(selectedNumQuestions)) {
+            if (selectedNumQuestions !== 'all' && quiz.noOfQuestion !== parseInt(selectedNumQuestions)) {
               return false;
             }
         

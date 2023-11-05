@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Categories from '../../database/data';
 
 const Quizfilter = ( { onFilter }) => {
 
@@ -40,10 +41,11 @@ const Quizfilter = ( { onFilter }) => {
         <label htmlFor="category">Category:</label>
         <select id="category" value={selectedCategory} onChange={handleCategoryChange}>
           <option value="all">All</option>
-          <option value="Science">Science</option>
-          <option value="History">History</option>
-          <option value="Geography">Geography</option>
-          {/* Add more options for categories */}
+          {Categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
         </select>
       </div>
       <div className='filter'>
@@ -53,7 +55,7 @@ const Quizfilter = ( { onFilter }) => {
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
-          {/* Add more options for difficulties */}
+          
         </select>
       </div>
       </div>
@@ -63,16 +65,18 @@ const Quizfilter = ( { onFilter }) => {
         <label htmlFor="topic">Topic:</label>
         <select id="topic" value={selectedTopic} onChange={handleTopicChange}>
           <option value="all">All</option>
+          <option value="general">General</option>
           <option value="Physics">Physics</option>
           <option value="World War II">World War II</option>
           <option value="Countries">Countries</option>
-          {/* Add more options for topics */}
+          
         </select>
       </div>
       <div className='filter'>
         <label htmlFor="numQuestions">Number of Questions:</label>
         <select id="numQuestions" value={selectedNumQuestions} onChange={handleNumQuestionsChange}>
           <option value="all">All</option>
+          <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>
           <option value="20">20</option>

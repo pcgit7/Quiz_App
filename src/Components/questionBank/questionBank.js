@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import AddQuestionForm from './AddQuestionForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewQuestion,updateQuestion,MovePrevQuestion } from '../../hooks/bank';
+import { addNewQuestion,updateQuestion,MovePrevQuestion } from '../../hooks/Set_Bank';
 import { moveNextAction } from '../../Redux/questionBank_reducer';
 import SubmitConfirmation from '../submitConfirmation';
 import { postQuestionBank } from '../../helper';
@@ -18,8 +18,7 @@ const QuestionBank = () => {
     const { questions , trace , answers ,noOfQuestions} = state;
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    console.log(showSubmit);
+    
     function addNewItemHandler (newQuestion) { 
 
         const { question , options , correctOption} = newQuestion;
@@ -71,7 +70,7 @@ const QuestionBank = () => {
     function onSubmit(){
         const url = 'https://quiz-app-server-a95t.onrender.com/api/question';
 
-        const updated = answers.map( item => parseInt(item));
+        const updated = answers.map( item => (parseInt(item)-1));
 
         postQuestionBank(url , {...state,answers : updated});
         navigate('/');

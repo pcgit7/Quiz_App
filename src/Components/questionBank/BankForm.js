@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "../../styles/home.css";
 import { useDispatch } from "react-redux";
-import { initialiseBank } from "../../hooks/bank";
+import { initialiseBank } from "../../hooks/Set_Bank";
 import { useNavigate } from "react-router-dom";
+import Categories from "../../database/data";
 
 const BankForm = () => {
-
-  const dispatch = useDispatch();  
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [selectedCategory, setSelectedCategory] = useState("Science");
@@ -32,18 +32,18 @@ const BankForm = () => {
 
   const submitHandler = () => {
     const data = {
-      category : selectedCategory,
-      difficulty : selectedDifficulty,
-      noOfQuestions : selectedNumQuestions,
-      topic : selectedTopic,
+      category: selectedCategory,
+      difficulty: selectedDifficulty,
+      noOfQuestions: selectedNumQuestions,
+      topic: selectedTopic,
     };
 
     dispatch(initialiseBank(data));
-    navigate('/question-bank/add-questions');
+    navigate("/question-bank/add-questions");
   };
   return (
     <div className="container">
-        <h2 className="text-light">Please Provide Quiz Details</h2>
+      <h2 className="text-light">Please Provide Quiz Details</h2>
       <div className="filter-container">
         <div className="filter">
           <label htmlFor="category">Category:</label>
@@ -52,10 +52,12 @@ const BankForm = () => {
             value={selectedCategory}
             onChange={handleCategoryChange}
           >
-            <option value="Science">Science</option>
-            <option value="History">History</option>
-            <option value="Geography">Geography</option>
-            {/* Add more options for categories */}
+            <option value="all">General</option>
+            {Categories.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
           </select>
         </div>
         <div className="filter">
@@ -75,7 +77,6 @@ const BankForm = () => {
         <div className="filter">
           <label htmlFor="topic">Topic:</label>
           <select id="topic" value={selectedTopic} onChange={handleTopicChange}>
-            
             <option value="Physics">Physics</option>
             <option value="World War II">World War II</option>
             <option value="Countries">Countries</option>

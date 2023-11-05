@@ -58,7 +58,6 @@ const AddQuestionForm = ({ addNewItem }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const newQuestion = {
       question,
       options: [optionA, optionB, optionC, optionD],

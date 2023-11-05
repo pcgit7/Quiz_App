@@ -12,16 +12,31 @@ export function flagResult(totalPoints, earnPoints){
     return (totalPoints * 50 / 100) < earnPoints; /** earn 50% marks */
 };
 
-export async function getServerData(url, callback){
-    const data = await (await axios.get(url))?.data;
-    return callback ? callback(data) : data;
+export async function getQuizes(url){
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        alert('error in getting data');
+    }
 }
 
+export async function getResultData(details){
+    try {
+        const response = await axios.post('https://quiz-app-server-a95t.onrender.com/api/result/get-result',details)
+        return response.data;
+    } catch (error) {
+        alert('error in getting data');
+    }
+}
 
-/** post server data */
-export async function postServerData(url, result, callback){
-    const data = await (await axios.post(url, result))?.data;
-    return callback ? callback(data) : data;
+export async function postResultData(url, result){
+    try {
+        const response = await axios.post(url, result);
+        return response.data;
+    } catch (error) {
+        alert('error in saving result');
+    }   
 }
 
 export async function postQuestionBank(url,data){

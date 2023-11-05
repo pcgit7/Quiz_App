@@ -9,7 +9,16 @@ export const resultReducer = createSlice({
 
     reducers : {
         setUserId : (state , action) => {
-            state.userId = action.payload;
+            let size = action.payload.size;
+
+            let arr = []
+            for(let i=0;i<size;i++)
+            arr.push(null);
+            
+            return {
+                userId : action.payload.username,
+                result : arr
+            }
         },
         pushResultAction : (state , action) => {
             state.result.push(action.payload);

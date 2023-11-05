@@ -6,13 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetAllAction } from '../Redux/question_reducer';
 import { resetResultAction } from '../Redux/result_reducer';
 import { attemps_number, earnPoints_Number, flagResult } from '../helper';
-import { usePublishResult } from '../hooks/setResult';
+import { usePublishResult } from '../hooks/Set_Result';
 
 const Result = () => {
     const dispatch = useDispatch();
     const { questions : {queue , answers , _id} , result : {result , userId }} = useSelector(state => state);
-
-    console.log(queue , answers , userId , result);
 
     const totalPoints = queue.length * 10;
 
@@ -34,8 +32,6 @@ const Result = () => {
         
         dispatch(resetAllAction());
         dispatch(resetResultAction());
-
-        //await axios.delete('http://localhost:5000/api/result');
     };
 
   return (

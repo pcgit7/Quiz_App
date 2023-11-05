@@ -1,67 +1,59 @@
-import React, { useEffect ,useState} from 'react'
-import Questions from './Questions';
-import { useSelector , useDispatch} from 'react-redux';
-import {  MoveNextQuestion , MovePrevQuestion} from '../hooks/fetchQuestions';
-import { pushAnswer } from '../hooks/setResult';
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from "react";
+import Questions from "./Questions";
+import { useSelector, useDispatch } from "react-redux";
+import { MoveNextQuestion, MovePrevQuestion } from "../hooks/Set_Questions";
+import { useNavigate } from "react-router-dom";
+import SubmitConfirmation from "./submitConfirmation";
 
 const Quiz = () => {
 
-    const state = useSelector( state => state);
+  const { trace, queue } = useSelector((state) => state.questions);
+  const dispatch = useDispatch();
 
-    const result = useSelector(state => state.result.result);
+  const [showSubmit , setShowSubmit] = useState(false);
 
-    //const [ {isLoading , serverError , apiData} ] = useFetchQuestions();
+  const onNoSubmit = () => setShowSubmit(false);
 
-    const { trace,queue } = useSelector(state => state.questions);
-    
-    const dispatch = useDispatch();
+  function onSubmit(){
+    navigate("/result");
+  }
 
-    const [checked , setChecked] = useState(undefined);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const onPrev = () => {
+    if (trace > 0) dispatch(MovePrevQuestion());
+  };
 
-    useEffect(() => {
-      //console.log(state);
-      console.log(result);
-    },[result]);
-
-    const onPrev = () => {
-      if(trace>0)
+  const onNext = () => {
+    if (trace < queue.length) {
+      dispatch(MoveNextQuestion());
+    }
+    if(trace+1===queue.length){
+      setShowSubmit(true);
       dispatch(MovePrevQuestion());
-    };
-
-    const onNext = () => {
-      if(trace<queue.length)
-      {
-        dispatch(MoveNextQuestion());
-        //dispatch(pushAnswer(1));
-        if(result.length <= trace)
-        dispatch(pushAnswer(checked));
-      }
-      setChecked(undefined);
-      if(result.length && result.length >= queue.length){
-        navigate('/result');
-      }
-    };
-
-    const onChecked = (check) => {
-      setChecked(check);
-    };
-
-    
+    }
+  };
 
   return (
-    <div className='container'>
-        <h1 className='title text-light'>Quiz</h1>
+    <div className="container">
+      {showSubmit && <SubmitConfirmation onNotSubmit={onNoSubmit} onSubmit={onSubmit}/>}
+      <h1 className="title text-light">Quiz</h1>
 
-        <Questions onChecked={onChecked}/>
-        <div className='grid'>
-            {trace>0 ? (<button className='btn prev' onClick={onPrev}>Previous</button>) : <div></div>}
-            <button className='btn next' onClick={onNext}>Next</button>
-        </div>
+      <Questions />
+      <div className="grid">
+        {trace > 0 ? (
+          <button className="btn prev" onClick={onPrev}>
+            Previous
+          </button>
+        ) : (
+          <div></div>
+        )}
+        <button className="btn next" onClick={onNext}>
+          Next
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Quiz
+export default Quiz;
